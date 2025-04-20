@@ -1,6 +1,34 @@
 /*
  * share_via_http.c - Share a file via HTTP using libmicrohttpd
  *
+ * initially generated using by Claude 3.7 Sonnet,
+ * from the following prompt:
+ * write a program, "share_via_http.c",
+ * that makes a file passed on the command-line available via http.
+ * in C, for running on linux, using libmicrohttpd.
+ * break up the code into sensibly sized functions in a single source file.
+ * use port 9999 by default, but allow it to be changed by a command-line option.
+ * print the url the file is available at to stdout,
+ * the printed url should not contain the filename (for brevity).
+ * when a request without filename is received, generate a http redirect to
+ * the url with the full filename.
+ * the url should refer to the host the program is run on using an ip address
+ * (prefer ipv4 but support ipv6)
+ * parse `/proc/net/route` to find the interface the default-route points to,
+ * use the appropriate userspace API of the linux kernel to
+ * find the ip address of the interface.
+ * if the default-route interface is a mobile internet connection
+ * (identified by an "rmnet" or "umts" name or a 10.0.0.0/24 address,
+ *  do not use it, but instead use other interfaces that are
+ *  up, not loopback, and have a route assigned.)
+ * if there are multiple possible ip addresses, generate a url for all of those.
+ * 
+ * use simple heuristics to generate a mime-type for serving the file.
+ * 
+ * optionally (at compile-time) use libqrencode to create a qr-code for the url,
+ * and print it to the terminal using ANSI codes
+ * like the `qrencde` program does in ANSI output mode.
+ *
  * Compile with:
  *   Without QR code support:
  *     gcc -o share_via_http share_via_http.c -lmicrohttpd
