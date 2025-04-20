@@ -519,16 +519,16 @@ static void print_qrcode(const char *url) {
     }
 
     /* Print top quiet zone */
-    printf("\n");
-    for (x = 0; x < qrcode->width + 4; x++) {
-        printf("  ");
+    for (y = 0; y < 2; y++) {
+        for (x = 0; x < qrcode->width + 4; x++) {
+            printf("\033[47m  \033[0m");
+        }
+	printf("\n");
     }
-    printf("\n");
 
     /* Print QR code with quiet zone on the sides */
     for (y = 0; y < qrcode->width; y++) {
-        printf("  "); /* Left quiet zone */
-        printf("  ");
+        printf("\033[47m    \033[0m"); /* Left quiet zone */
         
         for (x = 0; x < qrcode->width; x++) {
             unsigned char dot = qrcode->data[y * qrcode->width + x] & 1;
@@ -539,15 +539,17 @@ static void print_qrcode(const char *url) {
             }
         }
         
-        printf("  "); /* Right quiet zone */
+        printf("\033[47m    \033[0m"); /* Right quiet zone */
         printf("\n");
     }
 
     /* Print bottom quiet zone */
-    for (x = 0; x < qrcode->width + 4; x++) {
-        printf("  ");
+    for (y = 0; y < 2; y++) {
+        for (x = 0; x < qrcode->width + 4; x++) {
+            printf("\033[47m  \033[0m");
+        }
+	printf("\n");
     }
-    printf("\n");
 
     QRcode_free(qrcode);
 }
