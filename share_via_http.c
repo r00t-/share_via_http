@@ -488,15 +488,6 @@ static void find_ip_addresses() {
         }
     }
     
-    /* Fall back to localhost if no interfaces found */
-    if (num_urls == 0) {
-        char *url = malloc(MAX_URL_LENGTH);
-        if (url) {
-            snprintf(url, MAX_URL_LENGTH, "http://127.0.0.1:%d", port);
-            urls[num_urls++] = url;
-        }
-    }
-    
     freeifaddrs(ifaddr);
 }
 
