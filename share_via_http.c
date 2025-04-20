@@ -229,7 +229,7 @@ static int request_handler(void *cls, struct MHD_Connection *connection,
     char redirect_url[PATH_MAX];
 
     /* Only handle GET requests */
-    if (strcmp(method, "GET") != 0) {
+    if (strcmp(method, "GET") != 0 && strcmp(method, "HEAD") != 0) {
         response = MHD_create_response_from_buffer(
             strlen("Method not allowed"), (void*)"Method not allowed", MHD_RESPMEM_PERSISTENT);
         ret = MHD_queue_response(connection, MHD_HTTP_METHOD_NOT_ALLOWED, response);
