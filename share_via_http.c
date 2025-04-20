@@ -154,7 +154,7 @@ int main(int argc, char *argv[]) {
     }
 
     /* Wait for Ctrl+C */
-    printf("\nPress Ctrl+C to stop sharing\n");
+    printf("Press Ctrl+C to stop sharing\n");
     while (1) {
         sleep(1);
     }
@@ -563,14 +563,15 @@ static void print_urls() {
         printf("Could not determine any network addresses.\n");
         return;
     }
+
+#ifdef USE_QRCODE
+        print_qrcode(urls[0]);
+#endif
     
     printf("Sharing file '%s' at:\n", filename);
     
     for (i = 0; i < num_urls; i++) {
         printf("%s\n", urls[i]);
         
-#ifdef USE_QRCODE
-        print_qrcode(urls[i]);
-#endif
     }
 }
