@@ -230,7 +230,12 @@ static int request_handler(void *cls, struct MHD_Connection *connection,
 
     /* Only handle GET requests */
     if (strcmp(method, "GET") != 0) {
-        return MHD_NO;
+        response = MHD_create_response_from_buffer(
+            strlen("Method not allowed"), (void*)"Method not allowed", MHD_RESPMEM_PERSISTENT);
+        ret = MHD_queue_response(connection, MHD_HTTP_METHOD_NOT_ALLOWED, response);
+        MHD_destroy_response(response);
+        MHD_destroy_response(response);
+        return ret;
     }
 
     /* If URL is "/" or empty, redirect to the file */
