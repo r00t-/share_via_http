@@ -471,7 +471,7 @@ static void find_ip_addresses() {
                 }
             }
             /* Process IPv6 address - only if we don't have IPv4 */
-            else if (ifa->ifa_addr->sa_family == AF_INET6 && num_urls == 0) {
+            else if (ifa->ifa_addr->sa_family == AF_INET6) {
                 struct sockaddr_in6 *addr = (struct sockaddr_in6*)ifa->ifa_addr;
                 
                 /* Skip link-local IPv6 addresses */
