@@ -107,6 +107,7 @@ static struct MimeType mime_types[] = {
 };
 
 /* Function prototypes */
+//static MHD_AccessHandlerCallback request_handler;
 static int request_handler(void *cls, struct MHD_Connection *connection, 
                           const char *url, const char *method,
                           const char *version, const char *upload_data,
@@ -143,7 +144,7 @@ int main(int argc, char *argv[]) {
 
     /* Start the HTTP daemon */
     daemon = MHD_start_daemon(MHD_USE_SELECT_INTERNALLY, port, NULL, NULL,
-                             &request_handler, NULL, MHD_OPTION_END);
+                             (MHD_AccessHandlerCallback) &request_handler, NULL, MHD_OPTION_END);
     if (daemon == NULL) {
         fprintf(stderr, "Error starting MHD daemon\n");
         return 1;
