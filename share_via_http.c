@@ -139,6 +139,8 @@ int main(int argc, char *argv[]) {
     /* Print URLs */
     print_urls();
 
+    if (!num_urls) return 1;
+
     /* Start the HTTP daemon */
     daemon = MHD_start_daemon(MHD_USE_SELECT_INTERNALLY, port, NULL, NULL,
                              &request_handler, NULL, MHD_OPTION_END);
