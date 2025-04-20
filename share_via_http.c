@@ -29,12 +29,6 @@
  * and print it to the terminal using ANSI codes
  * like the `qrencde` program does in ANSI output mode.
  *
- * Compile with:
- *   Without QR code support:
- *     gcc -o share_via_http share_via_http.c -lmicrohttpd
- *   
- *   With QR code support:
- *     gcc -o share_via_http share_via_http.c -lmicrohttpd -lqrencode -DUSE_QRCODE
  */
 
 #include <stdio.h>
